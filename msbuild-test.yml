@@ -7,7 +7,7 @@ parameters:
   type: stepList 
 
 jobs:
-- job: ${{ parameters.testName }}_test
+- job: ${{ parameters.testId }}_test
   displayName: ${{ parameters.testName }}
 
   strategy:
