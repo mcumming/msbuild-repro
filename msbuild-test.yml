@@ -3,7 +3,6 @@ parameters:
   type: string
 - name: 'testTasks'
   type: stepList 
-  def
 
 jobs:
 - job: use-msbuilddll-test
