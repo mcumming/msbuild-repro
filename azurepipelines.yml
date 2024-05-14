@@ -10,7 +10,7 @@ jobs:
     testName: 'dotnet ./sdk/8.0.204/MSBuild.dll test'
     testTasks:
       - pwsh: |
-          dotnet /Users/runner/hostedtoolcache/dotnet/sdk/8.0.204/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks | Tee-Object -Variable cmdOutput
+          dotnet $env:DOTNET_ROOT/sdk/8.0.204/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks | Tee-Object -Variable cmdOutput
           echo "##vso[task.setvariable variable=Output;isOutput=true]$cmdOutput"
         displayName: 'getProperty using dotnet ./sdk/8.0.204/MSBuild.dll'
         name: 'getProperty'
