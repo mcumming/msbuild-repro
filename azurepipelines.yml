@@ -11,7 +11,7 @@ jobs:
     testTasks:
       - pwsh: |
           dotnet ./sdk/8.0.204/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
-        displayName: 'Act'
+        displayName: 'getProperty using dotnet ./sdk/8.0.204/MSBuild.dll'
         timeoutInMinutes: 1
 
 - template: msbuild-test.yml
@@ -21,7 +21,7 @@ jobs:
     testTasks:
       - pwsh: |
           dotnet msbuild $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
-        displayName: 'Act'
+        displayName: 'getProperty using dotnet msbuild'
         timeoutInMinutes: 1
 
 - template: msbuild-test.yml
@@ -31,5 +31,5 @@ jobs:
     testTasks:
       - pwsh: |
           dotnet build $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
-        displayName: 'Act'
+        displayName: 'getProperty using dotnet build'
         timeoutInMinutes: 1

@@ -24,6 +24,11 @@ jobs:
     vmImage: $(imageName)
 
   steps:
+    - pwsh: |
+        echo 'Arrange'
+      displayName: 'Arrange'
+      timeoutInMinutes: 1
+
     - checkout: self
       clean: true
 
@@ -51,10 +56,15 @@ jobs:
       displayName: 'Arrange'
 
     - pwsh: |
-        dotnet ./sdk/8.0.100/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
+        echo 'Act'
       displayName: 'Act'
       timeoutInMinutes: 1
 
     - ${{ each task in parameters.testTasks }}:
       - ${{ each pair in task }}:
           ${{ pair.key }}: ${{ pair.value }}    
+
+    - pwsh: |
+        echo 'Assert'
+      displayName: 'Assert'
+      timeoutInMinutes: 1
