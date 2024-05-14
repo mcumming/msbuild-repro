@@ -1,0 +1,58 @@
+parameters:
+- name: 'testName'
+  type: string
+- name: 'testTasks'
+  type: stepList 
+  default: []
+
+- job: use-msbuilddll-test
+  displayName: ${{ parameters.testName }}
+
+  strategy:
+    matrix:
+      macos-latest:
+        imageName: 'macOS-latest'
+      macos-13:
+        imageName: 'macOS-13'
+      macos-14:
+        imageName: 'macOS-14'
+      windows-latest:
+        imageName: 'windows-latest'
+  pool:
+    vmImage: $(imageName)
+
+  steps:
+    - checkout: self
+      clean: true
+
+    - task: UseDotNet@2
+      displayName: 'dotnet version'
+      inputs:
+        version: 8.0.x
+        performMultiLevelLookup: true
+        includePreviewVersions: true
+
+    - task: NuGetAuthenticate@1
+      inputs:
+        forceReinstallCredentialProvider: true
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet workload restore '
+      inputs:
+        command: 'custom'
+        custom: 'workload'
+        arguments: 'install maui macos maccatalyst tvos ios'
+
+    - pwsh: |
+        mkdir -p $(Build.SourcesDirectory)/test/maui
+        dotnet new maui -n maui-test -o $(Build.SourcesDirectory)/test/maui
+      displayName: 'Arrange'
+
+    - pwsh: |
+        dotnet ./sdk/8.0.100/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
+      displayName: 'Act'
+      timeoutInMinutes: 1
+
+    - ${{ each task in parameters.testTasks }}:
+      - ${{ each pair in task }}:
+          ${{ pair.key }}: ${{ pair.value }}    

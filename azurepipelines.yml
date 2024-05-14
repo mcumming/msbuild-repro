@@ -1,0 +1,16 @@
+
+
+stages:
+  stage: msbuild-test
+      displayName: 'Run tests'
+
+  jobs:
+    - template: msbuild-test.yml
+      parameters:
+        testName: 'dotnet ./sdk/8.0.100/MSBuild.dll test'
+        testTasks:
+          - pwsh: |
+              dotnet ./sdk/8.0.100/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
+            displayName: 'Act'
+            timeoutInMinutes: 1
+
