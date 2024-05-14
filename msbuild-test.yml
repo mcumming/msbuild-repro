@@ -5,7 +5,7 @@ parameters:
   type: stepList 
 
 jobs:
-- job: use-msbuilddll-test
+- job: use_msbuilddll_test
   displayName: ${{ parameters.testName }}
 
   strategy:
