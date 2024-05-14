@@ -12,15 +12,23 @@ jobs:
 
   strategy:
     matrix:
+      VSEng-Xamarin-RedmondMacBuildPool-iOS-Trusted:
+        poolName: 'VSEng-Xamarin-RedmondMacBuildPool-iOS-Trusted'
+        imageName: 
       macos-latest:
+        poolName: 
         imageName: 'macOS-latest'
       macos-13:
+        poolName: 
         imageName: 'macOS-13'
       macos-14:
+        poolName: 
         imageName: 'macOS-14'
       windows-latest:
+        poolName: 
         imageName: 'windows-latest'
   pool:
+    name: $(poolName)
     vmImage: $(imageName)
 
   steps:
