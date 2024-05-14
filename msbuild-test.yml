@@ -1,11 +1,13 @@
 parameters:
+- name: 'testId'
+  type: string
 - name: 'testName'
   type: string
 - name: 'testTasks'
   type: stepList 
 
 jobs:
-- job: use_msbuilddll_test
+- job: ${{ parameters.testName }}_test
   displayName: ${{ parameters.testName }}
 
   strategy:

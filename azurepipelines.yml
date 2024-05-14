@@ -6,6 +6,7 @@ trigger:
 jobs:
 - template: msbuild-test.yml
   parameters:
+    testId: 'msbuilddll'
     testName: 'dotnet ./sdk/8.0.204/MSBuild.dll test'
     testTasks:
       - pwsh: |
@@ -15,6 +16,7 @@ jobs:
 
 - template: msbuild-test.yml
   parameters:
+    testId: 'msbuild'
     testName: 'dotnet msbuild test'
     testTasks:
       - pwsh: |
@@ -24,6 +26,7 @@ jobs:
 
 - template: msbuild-test.yml
   parameters:
+    testId: 'build'
     testName: 'dotnet build test'
     testTasks:
       - pwsh: |
