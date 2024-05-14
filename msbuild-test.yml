@@ -12,8 +12,8 @@ jobs:
 
   strategy:
     matrix:
-      VSEng-Xamarin-RedmondMacBuildPool-iOS-Trusted:
-        poolName: 'VSEng-Xamarin-RedmondMacBuildPool-iOS-Trusted'
+      VSEng-Xamarin-RedmondMacBuildPool-iOS-Untrusted:
+        poolName: 'VSEng-Xamarin-RedmondMacBuildPool-iOS-Untrusted'
         imageName: 
       macos-latest:
         poolName: 
@@ -71,7 +71,7 @@ jobs:
     - pwsh: |
         dotnet ${{ parameters.testCommand }} $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks | Tee-Object -Variable cmdOutput
         echo "##vso[task.setvariable variable=Output;isOutput=true]$cmdOutput"
-      displayName: 'getProperty using dotnet ./sdk/8.0.204/MSBuild.dll'
+      displayName: 'getProperty'
       name: 'getProperty'
       timeoutInMinutes: 1
       continueOnError: true
