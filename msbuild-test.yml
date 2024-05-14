@@ -26,7 +26,7 @@ jobs:
   steps:
     - pwsh: |
         echo 'Arrange'
-      displayName: 'Arrange'
+      displayName: '===> Arrange  <==='
       timeoutInMinutes: 1
 
     - checkout: self
@@ -53,11 +53,11 @@ jobs:
     - pwsh: |
         mkdir -p $(Build.SourcesDirectory)/test/maui
         dotnet new maui -n maui-test -o $(Build.SourcesDirectory)/test/maui
-      displayName: 'Arrange'
+      displayName: 'Create test project'
 
     - pwsh: |
         echo 'Act'
-      displayName: 'Act'
+      displayName: '===>    Act   <==='
       timeoutInMinutes: 1
 
     - ${{ each task in parameters.testTasks }}:
@@ -66,5 +66,5 @@ jobs:
 
     - pwsh: |
         echo 'Assert'
-      displayName: 'Assert'
+      displayName: '===>  Assert  <==='
       timeoutInMinutes: 1
