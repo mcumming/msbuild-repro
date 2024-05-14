@@ -1,10 +1,10 @@
 
 
 stages:
-  stage: msbuild-test
+  - stage: msbuild-test
     displayName: 'Run tests'
 
-    jobs:
+    - jobs:
       - template: msbuild-test.yml
         parameters:
           testName: 'dotnet ./sdk/8.0.100/MSBuild.dll test'
