@@ -76,3 +76,7 @@ jobs:
         echo 'Assert'
       displayName: '===>  Assert  <==='
       timeoutInMinutes: 1
+
+    - pwsh: |
+        if ($env:cmdOutput -ne "net8.0-android;net8.0-ios;net8.0-maccatalyst") { throw "Expected 'net8.0-android;net8.0-ios;net8.0-maccatalyst' but got '$env:cmdOutput'" }
+      displayName: 'Verify output is "net8.0-android;net8.0-ios;net8.0-maccatalyst" '

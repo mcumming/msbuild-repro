@@ -10,9 +10,11 @@ jobs:
     testName: 'dotnet ./sdk/8.0.204/MSBuild.dll test'
     testTasks:
       - pwsh: |
-          dotnet ./sdk/8.0.204/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
+          dotnet ./sdk/8.0.204/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks | Tee-Object -Variable cmdOutput
+          echo "##vso[task.setvariable variable=cmdOutput;isOutput=true]$cmdOutput"
         displayName: 'getProperty using dotnet ./sdk/8.0.204/MSBuild.dll'
         timeoutInMinutes: 1
+        continueOnError: true
 
 - template: msbuild-test.yml
   parameters:
@@ -20,9 +22,11 @@ jobs:
     testName: 'dotnet msbuild test'
     testTasks:
       - pwsh: |
-          dotnet msbuild $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
+          dotnet msbuild $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks| Tee-Object -Variable cmdOutput
+          echo "##vso[task.setvariable variable=cmdOutput;isOutput=true]$cmdOutput"
         displayName: 'getProperty using dotnet msbuild'
         timeoutInMinutes: 1
+        continueOnError: true
 
 - template: msbuild-test.yml
   parameters:
@@ -30,6 +34,8 @@ jobs:
     testName: 'dotnet build test'
     testTasks:
       - pwsh: |
-          dotnet build $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
+          dotnet build $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks| Tee-Object -Variable cmdOutput
+          echo "##vso[task.setvariable variable=cmdOutput;isOutput=true]$cmdOutput"
         displayName: 'getProperty using dotnet build'
         timeoutInMinutes: 1
+        continueOnError: true
