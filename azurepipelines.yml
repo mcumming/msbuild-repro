@@ -2,7 +2,7 @@
 
 stages:
   stage: msbuild-test
-      displayName: 'Run tests'
+    displayName: 'Run tests'
 
   jobs:
     - template: msbuild-test.yml
