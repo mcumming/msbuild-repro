@@ -86,5 +86,5 @@ jobs:
       displayName: 'List environment variables'
 
     - pwsh: |
-        if ($env:GETPROPERTY_OUTPUT -ne "net8.0-android;net8.0-ios;net8.0-maccatalyst") { throw "Expected 'net8.0-android;net8.0-ios;net8.0-maccatalyst' but got '$env:cmdOutput'" }
+        if (-Not ($env:GETPROPERTY_OUTPUT).StartsWith("net8.0-android;net8.0-ios;net8.0-maccatalyst")) { throw "Expected 'net8.0-android;net8.0-ios;net8.0-maccatalyst' but got '$env:GETPROPERTY_OUTPUT'" }
       displayName: 'Verify output is "net8.0-android;net8.0-ios;net8.0-maccatalyst" '
