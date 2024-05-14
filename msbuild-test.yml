@@ -68,13 +68,13 @@ jobs:
       displayName: '===>    Act   <==='
       timeoutInMinutes: 1
 
-      - pwsh: |
-          dotnet ${{ parameters.testCommand }} $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks | Tee-Object -Variable cmdOutput
-          echo "##vso[task.setvariable variable=Output;isOutput=true]$cmdOutput"
-        displayName: 'getProperty using dotnet ./sdk/8.0.204/MSBuild.dll'
-        name: 'getProperty'
-        timeoutInMinutes: 1
-        continueOnError: true
+    - pwsh: |
+        dotnet ${{ parameters.testCommand }} $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks | Tee-Object -Variable cmdOutput
+        echo "##vso[task.setvariable variable=Output;isOutput=true]$cmdOutput"
+      displayName: 'getProperty using dotnet ./sdk/8.0.204/MSBuild.dll'
+      name: 'getProperty'
+      timeoutInMinutes: 1
+      continueOnError: true
 
     - pwsh: |
         echo 'Assert'
