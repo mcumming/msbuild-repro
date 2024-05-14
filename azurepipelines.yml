@@ -6,10 +6,10 @@ trigger:
 jobs:
 - template: msbuild-test.yml
   parameters:
-    testName: 'dotnet ./sdk/8.0.100/MSBuild.dll test'
+    testName: 'dotnet ./sdk/8.0.204/MSBuild.dll test'
     testTasks:
       - pwsh: |
-          dotnet ./sdk/8.0.100/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
+          dotnet ./sdk/8.0.204/MSBuild.dll $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks
         displayName: 'Act'
         timeoutInMinutes: 1
 
