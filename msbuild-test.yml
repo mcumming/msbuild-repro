@@ -3,8 +3,8 @@ parameters:
   type: string
 - name: 'testName'
   type: string
-- name: 'testTasks'
-  type: stepList 
+- name: 'testCommand'
+  type: string 
 
 jobs:
 - job: ${{ parameters.testId }}_test
@@ -68,9 +68,13 @@ jobs:
       displayName: '===>    Act   <==='
       timeoutInMinutes: 1
 
-    - ${{ each task in parameters.testTasks }}:
-      - ${{ each pair in task }}:
-          ${{ pair.key }}: ${{ pair.value }}    
+      - pwsh: |
+          dotnet ${{ parameters.testCommand }} $(Build.SourcesDirectory)/test/maui/maui-test.csproj -getProperty:TargetFrameworks | Tee-Object -Variable cmdOutput
+          echo "##vso[task.setvariable variable=Output;isOutput=true]$cmdOutput"
+        displayName: 'getProperty using dotnet ./sdk/8.0.204/MSBuild.dll'
+        name: 'getProperty'
+        timeoutInMinutes: 1
+        continueOnError: true
 
     - pwsh: |
         echo 'Assert'
